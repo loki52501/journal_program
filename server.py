@@ -1,4 +1,5 @@
 import json
+import os
 import re
 import secrets
 import base64
@@ -141,7 +142,6 @@ class _Handler(BaseHTTPRequestHandler):
         if len(password) < 1:
             _json_response(self, 400, {"error": "password required"})
             return
-        import os
         salt = os.urandom(32)
         key = derive_key(password, salt)
         key_check = make_key_check(key, salt)
